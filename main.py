@@ -23,8 +23,11 @@ numpy.random.shuffle(d)
 ########partition, preprocess, and classify
 partitions=partition.partition(d)
 for i in range(0, len(partitions)):
-    test=partitions.pop(i)
-    numpy.concatenate(partitions)
+    print('Fold '+str(i+1))
+    test=partitions.pop(i).copy()
+    train=numpy.concatenate(partitions).copy()
+    #preprocess
+    pp.preprocess(train, meta)
     #classify
     #evaluate
     partitions.append(test)
