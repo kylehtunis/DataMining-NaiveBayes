@@ -63,6 +63,7 @@ def preprocess(data, meta):
             return ret
     
     def entropyBasedMPs(att, MPs, lBound, rBound, eOld):
+#        print(MPs)
         if rBound==-1:
             rBound=n
         bestInfo=1.
@@ -108,7 +109,7 @@ def preprocess(data, meta):
             return MPs
     #    print(MPs)
         else:
-            return
+            return MPs
     
     #data.sort(order='fnlwgt')
     #print(data['fnlwgt'].tolist())
@@ -130,5 +131,5 @@ def preprocess(data, meta):
                 prev=mp[0]
             data[meta.names()[i]][prev:]=data[meta.names()[i]][-1]    
                     
-    data.sort(order=meta.names()[2])
+#    data.sort(order=meta.names()[2])
     return data          
