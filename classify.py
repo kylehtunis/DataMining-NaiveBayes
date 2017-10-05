@@ -18,24 +18,29 @@ def classify(train, test, meta):
     m=len(set(train[classLabel]))
     
     ########create tables to hold probabilities
-    priorProbs=[]*m
-    postProbs=numpy.ndarray((m, numOfAtts), list)
-    postProbs[:][:]=[]
+    priorProbs=[0.]*m
+    maxWidth=-1
+    for att in meta.names():
+        w=len(set(train[att]))
+        if w>maxWidth:
+            maxWidth=w
+    postProbs=numpy.empty((m, numOfAtts-1, maxWidth))
+    postProbs[:][:][:]=1.
+#    print(postProbs)
     
     ######## get prior probabilities and class counts
     for sample in train:
         priorProbs[classes.index(sample[-1])]+=1
-    for c in priorProbs:
-        c/=n
+    for i in range(0,len(priorProbs)):
+        priorProbs[i]/=n
     print(priorProbs)
     
     ########get posterior probabilities
     for att in meta.names()[:-1]:
         atts=list(set(train[att]))
-        for c in postProbs[:][meta.names().index(att)]:
-            c=[]*len(atts)
         for i in range(0,n):
-            postProbs[train[att][-1],atts.index(train[att][i])]+=1
-        for i in  range(0, postProbs[:][meta.names().index(att)]):
-            c/=priorProbs[i]
+            postProbs[classes.index(train[i][-1]),meta.names().index(att),atts.index(train[att][i])]+=1
+        for c in range(0,m):
+            for i in range(0,len(atts)):
+                postProbs[c][meta.names().index(att),i]/=(priorProbs[c]*n)
     print(postProbs)
