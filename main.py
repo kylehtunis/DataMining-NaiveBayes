@@ -10,6 +10,7 @@ import numpy
 import sys
 import preprocess as pp
 import partition
+import classify
 
 ########get data from file
 fileName=sys.argv[1]
@@ -28,7 +29,10 @@ for i in range(0, len(partitions)):
     test=partitions.pop(i).copy()
     train=numpy.concatenate(partitions).copy()
     #preprocess
-    pp.preprocess(train, meta)
+    print('Preprocessing...')
+    train=pp.preprocess(train, meta)
     #classify
+    print('Classifying...')
+    classify.classify(train, test, meta)
     #evaluate
     partitions.append(test)

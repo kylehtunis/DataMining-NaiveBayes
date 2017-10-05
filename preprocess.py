@@ -7,7 +7,7 @@ Created on Wed Sep 27 15:51:14 2017
 import numpy
 
 def preprocess(data, meta):
-#######useful global variables
+#######useful variables
     n=len(data)
     classLabel=meta.names()[-1]
     classes=list(set(data[classLabel]))
