@@ -17,6 +17,11 @@ def classify(train, test, meta):
     numOfAtts=len(meta.names())
     m=len(set(train[classLabel]))
     
+    ########generate full att list
+    attList=[]
+    for i in range(0, len(meta.names())-1):
+        attList.append(list(set(train[meta.names()[i]])))
+    
     ########create tables to hold probabilities
     priorProbs=[0.]*m
     maxWidth=-1
@@ -24,7 +29,7 @@ def classify(train, test, meta):
         w=len(set(train[att]))
         if w>maxWidth:
             maxWidth=w
-    postProbs=numpy.empty((m, numOfAtts-1, maxWidth))
+    postProbs=numpy.empty((m, numOfAtts-1, maxWidth+1))
     postProbs[:][:][:]=1.
 #    print(postProbs)
     
@@ -37,10 +42,34 @@ def classify(train, test, meta):
     
     ########get posterior probabilities
     for att in meta.names()[:-1]:
-        atts=list(set(train[att]))
+        atts=attList[meta.names().index(att)]
         for i in range(0,n):
             postProbs[classes.index(train[i][-1]),meta.names().index(att),atts.index(train[att][i])]+=1
         for c in range(0,m):
-            for i in range(0,len(atts)):
+            for i in range(0,maxWidth):
                 postProbs[c][meta.names().index(att),i]/=(priorProbs[c]*n)
-    print(postProbs)
+    
+    ########classify test set
+    results=[]
+    notFoundCount=0
+    for sample in test:
+        probs=[0.]*m
+        for c in range(0,m):
+            prob=0.
+            for i in range(0, len(sample)-1):
+                if meta.types()[i]=='numeric':
+                    continue
+                att
+                try:
+                    att=attList[i].index(sample[i])
+                except ValueError:
+                    att=maxWidth
+                    notFoundCount+=1
+                prob+=postProbs[c][i][att]
+            probs[c]=prob*priorProbs[c]
+            print(probs)
+        results.append(probs.index(max(probs)))
+    print(results)
+    print(test)
+    print(notFoundCount)
+                

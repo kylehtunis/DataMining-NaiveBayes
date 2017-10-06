@@ -30,9 +30,9 @@ for i in range(0, len(partitions[:1])):
     train=numpy.concatenate(partitions).copy()
     #preprocess
     print('Preprocessing...')
-    train=pp.preprocess(test, meta)
+    train=pp.preprocess(train, meta)
     #classify
     print('Classifying...')
-    classify.classify(test, train, meta)
+    classify.classify(train, test, meta)
     #evaluate
     partitions.append(test)
