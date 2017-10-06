@@ -11,6 +11,7 @@ import sys
 import preprocess as pp
 import partition
 import classify
+import evaluate
 
 ########get data from file
 fileName=sys.argv[1]
@@ -33,6 +34,7 @@ for i in range(0, len(partitions[1:2])):
     train=pp.preprocess(train, meta)
     #classify
     print('Classifying...')
-    classify.classify(train, test, meta)
+    results=classify.classify(train, test, meta)
     #evaluate
+    evaluate.evaluate(test, results)
     partitions.append(test)

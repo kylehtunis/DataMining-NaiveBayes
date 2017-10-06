@@ -68,10 +68,8 @@ def classify(train, test, meta):
                 classProb=postProbs[c][i][att]
 #                print(classProb)
                 probs[c]*=classProb
-#            print(prob)
-            print(probs)
+#            print(probs)
         results.append(probs.index(max(probs)))
-    print(results)
-    print(test)
-    print(notFoundCount)
+    
+    return results
                 
