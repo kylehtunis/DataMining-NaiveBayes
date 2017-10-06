@@ -55,7 +55,7 @@ def classify(train, test, meta):
     for sample in test:
         probs=[0.]*m
         for c in range(0,m):
-            prob=0.
+            probs[c]=priorProbs[c]
             for i in range(0, len(sample)-1):
                 if meta.types()[i]=='numeric':
                     continue
@@ -65,8 +65,10 @@ def classify(train, test, meta):
                 except ValueError:
                     att=maxWidth
                     notFoundCount+=1
-                prob+=postProbs[c][i][att]
-            probs[c]=prob*priorProbs[c]
+                classProb=postProbs[c][i][att]
+#                print(classProb)
+                probs[c]*=classProb
+#            print(prob)
             print(probs)
         results.append(probs.index(max(probs)))
     print(results)
