@@ -25,9 +25,9 @@ numpy.random.shuffle(d)
 
 ########partition, preprocess, and classify
 partitions=partition.partition(d)
-for i in range(0, len(partitions[1:2])):
+for i in range(0, len(partitions)):
     print('Fold '+str(i+1))
-    test=partitions.pop(0).copy()
+    test=partitions.pop(0)
     train=numpy.concatenate(partitions).copy()
     #preprocess
     print('Preprocessing...')
@@ -36,5 +36,5 @@ for i in range(0, len(partitions[1:2])):
     print('Classifying...')
     results=classify.classify(train, test, meta)
     #evaluate
-    evaluate.evaluate(test, results)
+    evaluate.evaluate(test, meta, results)
     partitions.append(test)

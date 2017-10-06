@@ -5,8 +5,9 @@ Created on Thu Oct  5 22:50:38 2017
 @author: kyleh
 """
 
-def evaluate(test, results):
-    classes=list(set(test[:][-1]))
+def evaluate(test, meta, results):
+    classes=list(set(test[meta.names()[-1]]))
+#    print(classes)
     correct=0
     incorrect=0
     for i in range(0,len(results)):

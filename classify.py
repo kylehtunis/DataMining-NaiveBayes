@@ -38,7 +38,7 @@ def classify(train, test, meta):
         priorProbs[classes.index(sample[-1])]+=1
     for i in range(0,len(priorProbs)):
         priorProbs[i]/=n
-    print(priorProbs)
+#    print(priorProbs)
     
     ########get posterior probabilities
     for att in meta.names()[:-1]:
