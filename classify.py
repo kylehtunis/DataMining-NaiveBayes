@@ -58,7 +58,15 @@ def classify(train, test, meta):
             probs[c]=priorProbs[c]
             for i in range(0, len(sample)-1):
                 if meta.types()[i]=='numeric':
-                    continue
+                    bins=sorted(list(set(train[meta.names()[i]])))
+                    val=sample[i]
+                    newVal=-1
+                    for b in bins:
+                        if b>val:
+                            newVal=b
+                    if newVal==-1:
+                        newVal=bins[-1]
+                    sample[i]=newVal
                 att
                 try:
                     att=attList[i].index(sample[i])
@@ -70,6 +78,7 @@ def classify(train, test, meta):
                 probs[c]*=classProb
 #            print(probs)
         results.append(probs.index(max(probs)))
+    print(postProbs)
     
     return results
                 
