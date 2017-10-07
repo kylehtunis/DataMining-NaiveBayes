@@ -49,7 +49,7 @@ def preprocess(data, meta):
         return entropy
     
     def findMPs(att):
-        if att!=mostDescretizable:
+        if att==mostDescretizable:
             return entropyBasedMPs(att, [], 1, -1, e)
         else:
             vals=list(set(data[att]))
