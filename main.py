@@ -33,10 +33,10 @@ for i in range(0, len(partitions)):
     test=partitions.pop(0)
     train=numpy.concatenate(partitions).copy()
     #preprocess
-    print('Preprocessing...')
+#    print('Preprocessing...')
     train=pp.preprocess(train, meta)
     #classify
-    print('Classifying...')
+#    print('Classifying...')
     results=classify.classify(train, test, meta)
     #evaluate
     evaluator.evaluate(test, meta, results)
@@ -48,3 +48,4 @@ print('Average Micro F1: '+str(evaluator.micF))
 print('Average Macro Precision: '+str(evaluator.macP))
 print('Average Macro Recall: '+str(evaluator.macR))
 print('Average Macro F1: '+str(evaluator.macF))
+print('Average Accuracy: '+str(evaluator.acc))

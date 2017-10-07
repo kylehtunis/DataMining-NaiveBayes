@@ -14,6 +14,7 @@ class Evaluator:
         self.micP=0.
         self.micR=0.
         self.micF=0.
+        self.acc=0.
     
     def evaluate(self, test, meta, results):
         classes=list(set(test[meta.names()[-1]]))
@@ -57,6 +58,7 @@ class Evaluator:
         self.micP+=microP/10.
         self.micR+=microR/10.
         self.micF+=microF/10.
+        self.acc+=acc/10.
         
         print('Micro Precision: '+str(microP))
         print('Micro Recall: '+str(microR))
@@ -64,3 +66,4 @@ class Evaluator:
         print('Macro Precision: '+str(macroP))
         print('Macro Recall: '+str(macroR))
         print('Macro F1: '+str(macroF))
+        print('Accuracy: ')
