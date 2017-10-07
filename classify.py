@@ -46,7 +46,7 @@ def classify(train, test, meta):
         for i in range(0,n):
             postProbs[classes.index(train[i][-1]),meta.names().index(att),atts.index(train[att][i])]+=1
         for c in range(0,m):
-            for i in range(0,maxWidth):
+            for i in range(0,maxWidth+1):
                 postProbs[c][meta.names().index(att),i]/=(priorProbs[c]*n)
     
     ########classify test set
