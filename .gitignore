@@ -107,3 +107,5 @@ ENV/
 # mypy
 .mypy_cache/
 >>>>>>> ff0086b7e39f1ef0878cea92b33cf744643e7c59
+
+kyletunis\.zip
