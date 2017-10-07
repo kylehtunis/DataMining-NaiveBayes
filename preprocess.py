@@ -7,7 +7,7 @@ Created on Wed Sep 27 15:51:14 2017
 import numpy
 
 def preprocess(data, meta):
-#######useful variables
+    #######useful variables
     n=len(data)
     classLabel=meta.names()[-1]
     classes=list(set(data[classLabel]))
@@ -49,7 +49,7 @@ def preprocess(data, meta):
         return entropy
     
     def findMPs(att):
-        if len(set(data[att]))<1000:
+        if att!=mostDescretizable:
             return entropyBasedMPs(att, [], 1, -1, e)
         else:
             vals=list(set(data[att]))
@@ -114,6 +114,17 @@ def preprocess(data, meta):
     #data.sort(order='fnlwgt')
     #print(data['fnlwgt'].tolist())
     
+    
+    mostDescretizable=''
+    mostDescretizableNxd=-1
+    mostDescretizableVal=-1
+    for i in range(0, numOfAtts-1):
+        if meta.types()[i]=='numeric':
+            w=len(set(data[meta.names()[i]]))
+            if w<mostDescretizableVal:
+                mostDescretizableVal=w
+                mostDescretizableNxd=i
+    mostDescretizable=meta.names()[mostDescretizableNxd]
     e=entropy()
     for i in range(0, numOfAtts-1):
         if meta.types()[i]=='numeric':

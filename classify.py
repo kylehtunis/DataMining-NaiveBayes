@@ -48,17 +48,20 @@ def classify(train, test, meta):
         for c in range(0,m):
             for i in range(0,maxWidth+1):
                 postProbs[c][meta.names().index(att),i]/=(priorProbs[c]*n)
+    print(postProbs)
     
     ########classify test set
     numericBins=[]
-    for i in range(0, len(meta.names()-1)):
+    for i in range(0, len(meta.names())-1):
         if meta.types()[i]=='numeric':
-            numericBins.append(sorted(list(set(train[att]))))
+            numericBins.append(sorted(list(set(train[meta.names()[i]]))))
         else:
             numericBins.append([])
+    print(numericBins)
     results=[]
     notFoundCount=0
     for sample in test:
+#        print(sample)
         probs=[0.]*m
         for c in range(0,m):
             probs[c]=priorProbs[c]
@@ -79,7 +82,8 @@ def classify(train, test, meta):
                     att=maxWidth
                     notFoundCount+=1
                 classProb=postProbs[c][i][att]
-#                print(classProb)
+#                if meta.types()[i]=='numeric':
+#                    print(classProb)
                 probs[c]*=classProb
 #            print(probs)
         results.append(probs.index(max(probs)))
