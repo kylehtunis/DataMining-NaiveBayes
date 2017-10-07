@@ -20,7 +20,7 @@ data, meta = scipy.io.arff.loadarff(f)
 
 ########prepare to partition
 d = data.copy()
-numpy.random.seed=(8008)
+#numpy.random.seed=(8008)
 numpy.random.shuffle(d)
 
 ########partition, preprocess, and classify
