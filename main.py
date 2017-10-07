@@ -22,6 +22,8 @@ data, meta = scipy.io.arff.loadarff(f)
 d = data.copy()
 #numpy.random.seed=(8008)
 numpy.random.shuffle(d)
+
+########create evaluator
 evaluator=evaluate.Evaluator()
 
 ########partition, preprocess, and classify
@@ -40,7 +42,9 @@ for i in range(0, len(partitions)):
     evaluator.evaluate(test, meta, results)
     partitions.append(test)
     
-print('Total True Positive: '+str(evaluator.ttp))
-print('Total False Positive: '+str(evaluator.tfp))
-print('Total True Negative: '+str(evaluator.ttn))
-print('Total False Negative: '+str(evaluator.tfn))
+    print('Micro Precision: '+str(evaluator.micP))
+    print('Micro Recall: '+str(evaluator.micR))
+    print('Micro F1: '+str(evaluator.micF))
+    print('Macro Precision: '+str(evaluator.macP))
+    print('Macro Recall: '+str(evaluator.macR))
+    print('Macro F1: '+str(evaluator.macF))
