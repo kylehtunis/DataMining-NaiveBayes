@@ -49,7 +49,7 @@ class Evaluator:
         microF=(2*microP*microR)/(microP+microR)
         macroP=(precA+precB)/2
         macroR=(recA+recB)/2
-        microF=(f1A+f1B)/2
+        macroF=(f1A+f1B)/2
         
         self.macP+=macroP/10.
         self.macR+=macroR/10.
