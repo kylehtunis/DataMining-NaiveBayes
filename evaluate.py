@@ -66,4 +66,4 @@ class Evaluator:
         print('Macro Precision: '+str(macroP))
         print('Macro Recall: '+str(macroR))
         print('Macro F1: '+str(macroF))
-        print('Accuracy: ')
+        print('Accuracy: '+str(acc))

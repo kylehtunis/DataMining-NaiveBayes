@@ -20,7 +20,7 @@ data, meta = scipy.io.arff.loadarff(f)
 
 ########prepare to partition
 d = data.copy()
-#numpy.random.seed=(8008)
+numpy.random.seed=(80085)
 numpy.random.shuffle(d)
 
 ########create evaluator
@@ -41,7 +41,8 @@ for i in range(0, len(partitions)):
     #evaluate
     evaluator.evaluate(test, meta, results)
     partitions.append(test)
-    
+
+print('\n')
 print('Average Micro Precision: '+str(evaluator.micP))
 print('Average Micro Recall: '+str(evaluator.micR))
 print('Average Micro F1: '+str(evaluator.micF))
